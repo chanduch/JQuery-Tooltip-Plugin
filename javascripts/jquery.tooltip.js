@@ -1,0 +1,143 @@
+(function($) {
+
+   $.fn.tooltip = function(settings) {
+     // Configuration setup
+     config = { 
+       'dialog_content_selector' : 'div.tooltip_description',
+       'animation_distance' : 50,
+       'opacity' : 0.85,
+       'arrow_left_offset' : 70,
+       'arrow_top_offset' : 50,
+       'arrow_height' : 20,
+       'arrow_width' : 20,
+       'animation_duration_ms' : 300
+     }; 
+     if (settings) $.extend(config, settings);
+
+     /**
+      * Apply interaction to all the matching elements
+      **/
+     this.each(function() {
+       $(this).bind("mouseover",function(){
+         _show(this);
+       })
+       .bind("mouseout",function(){
+         _hide(this);
+       })
+     });
+          
+     /**
+      * Positions the dialog box based on the target
+      * element's location
+      **/
+     function _show(target_elm) {
+       dialog_content = $(target_elm).find(config.dialog_content_selector)
+       dialog_box = _create(dialog_content);
+       
+       $("body").append(dialog_box);
+       target_elm_position = $(target_elm).offset();
+
+       // coming from the top right
+       if (target_elm_position.top < $(dialog_box).outerHeight() && target_elm_position.top >= config.arrow_top_offset) {
+         position = { 
+           start : { 
+             left : target_elm_position.left + $(target_elm).outerWidth() + config.animation_distance,
+             top  : target_elm_position.top + ($(target_elm).outerHeight() / 2) - config.arrow_top_offset
+           },
+           end : {
+             left : target_elm_position.left + $(target_elm).outerWidth(),
+             top  : target_elm_position.top + ($(target_elm).outerHeight() / 2) - config.arrow_top_offset
+           },
+           arrow_class : "div.left_arrow"
+         }
+       }
+       // coming from the bottom right
+       else if (target_elm_position.left < config.arrow_left_offset + $(target_elm).outerWidth() && target_elm_position.top > $(dialog_box).outerHeight()) {
+         position = { 
+           start : { 
+             left : target_elm_position.left + $(target_elm).outerWidth() + config.animation_distance,
+             top  : target_elm_position.top + ($(target_elm).outerHeight() / 2) + config.arrow_top_offset - $(dialog_box).outerHeight() + config.arrow_height
+           },
+           end : {
+             left : target_elm_position.left + $(target_elm).outerWidth(),
+             top  : target_elm_position.top + ($(target_elm).outerHeight() / 2) + config.arrow_top_offset - $(dialog_box).outerHeight() + config.arrow_height
+           },
+           arrow_class : "div.left_arrow"
+         }
+         $(dialog_box).find("div.left_arrow").css({ top: $(dialog_box).outerHeight() - (config.arrow_top_offset * 2) + "px" });
+       }
+       // coming from the top
+       else if (target_elm_position.top + config.animation_distance > $(dialog_box).outerHeight() && target_elm_position.left >= config.arrow_left_offset) {
+         position = { 
+           start : { 
+             left : target_elm_position.left + ($(target_elm).outerWidth() / 2) - config.arrow_left_offset,
+             top  : target_elm_position.top - config.animation_distance - $(dialog_box).outerHeight()
+           },
+           end : {
+             left : target_elm_position.left + ($(target_elm).outerWidth() / 2) - config.arrow_left_offset,
+             top  : target_elm_position.top - $(dialog_box).outerHeight() + config.arrow_height
+           },
+           arrow_class : "div.down_arrow"
+         }
+       }       
+       // coming from the bottom
+       else if (target_elm_position.top + config.animation_distance < $(dialog_box).outerHeight()) {
+         position = { 
+           start : { 
+             left : target_elm_position.left + ($(target_elm).outerWidth() / 2) - config.arrow_left_offset,
+             top  : target_elm_position.top + $(target_elm).outerHeight() + config.animation_distance
+           },
+           end : {
+             left : target_elm_position.left + ($(target_elm).outerWidth() / 2) - config.arrow_left_offset,
+             top  : target_elm_position.top + $(target_elm).outerHeight()
+           },
+           arrow_class : "div.up_arrow"
+         }
+       }
+        
+       // position and show the box
+       $(dialog_box).css({ 
+         top : position.start.top + "px", 
+         left : position.start.left + "px", 
+         opacity : config.opacity
+       });       
+       $(dialog_box).find("div.arrow").hide();
+       $(dialog_box).find(position.arrow_class).show();
+       
+       // begin animation
+       $(dialog_box).animate({
+         top : position.end.top,
+         left: position.end.left,
+         opacity : "toggle"
+       }, config.animation_duration_ms);       
+       
+     }; // -- end _show function
+     
+     /**
+      * Stop the animation (if any) and remove from dialog box from the DOM
+      */
+     function _hide(target_elm) {
+       $("body").find("div.tooltip").stop().remove();
+     };
+     
+     /**
+      * Creates the dialog box element
+      **/
+     function _create(content_elm) {
+       dialog_box = $("<div class='tooltip'>\
+         <div class='up_arrow arrow'></div>\
+         <div class='left_arrow arrow'></div\
+         <div class='content'></div>\
+         <div style='clear:both'></div>\
+         <div class='down_arrow arrow'></div>\
+       </div>");
+       header = ($(content_elm).attr("title")) ? "<h1>" + $(content_elm).attr("title") + "</h1>" : '';
+       content = $(content_elm).html();
+       $(dialog_box).find("div.content").html(header + content)
+       return dialog_box;
+     };
+          
+     return this; 
+   };
+ 
+ })(jQuery);
