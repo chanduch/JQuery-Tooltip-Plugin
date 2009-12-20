@@ -10,15 +10,17 @@
 	<style type="text/css">
 		body {
   		margin-top: 1.0em;
-  		background-color: #db6dbc;
+  		background-color: white;
 		  font-family: "Helvetica,Arial,FreeSans"; 
   		color: #000000;
     }
+    * { font-family: monaco;}
     #container {
       margin: 0 auto;
       width: 700px;
     }
-		h1 { font-size: 3.8em; color: #249243; margin-bottom: 3px; }
+
+		h1 { font-size: 2.0em; color: #249243; margin-bottom: 3px; font-family: "verdana"; }
 		h1 .small { font-size: 0.4em; }
 		h1 a { text-decoration: none }
 		h2 { font-size: 1.5em; color: #249243; }
@@ -29,7 +31,26 @@
 		pre { background: #000; color: #fff; padding: 15px;}
     hr { border: 0; width: 80%; border-bottom: 1px solid #aaa}
     .footer { text-align:center; padding-top:30px; font-style: italic; }
+
+    /** tooltip styles **/
+    div.item { width:100px; height:50px; background-color: maroon; text-align:center; padding-top:25px; color: white;}
+    div.tooltip h1 { color: white; }
+    div#item_1 { position: absolute; top: 100px; left: 0px; }
+    div#item_2 { position: absolute; top: 500px; left: 0px; }      
+    div#item_3 { position: absolute; top: 0px; left: 180px; }            
+    div#item_4 { position: absolute; top: 400px; left: 180px; }
 	</style>
+	
+  
+  <link rel="stylesheet" href="stylesheets/jquery.tooltip/jquery.tooltip.css" type="text/css" />
+  <script type="text/javascript" src="javascripts/jquery.min.js"></script>
+  <script type="text/javascript" src="javascripts/jquery.tooltip.js"></script>
+  <script type="text/javascript">
+    $j = jQuery.noConflict();
+    $j(document).ready(function(){
+      $j("div.item").tooltip().css({opacity: 0.9});
+    });
+  </script>
 	
 </head>
 
@@ -49,16 +70,49 @@
       <span class="small">by <a href="http://github.com/gdakram">gdakram</a></span></h1>
 
     <div class="description">
-      A simple hover tooltip JQuery plugin
+      A simple hover tooltip <a href="http://jquery.com/">JQuery</a> plugin
     </div>
 
-    <h2>License</h2>
-<p>MIT License</p>
-<h2>Authors</h2>
-<p>Shahrier Akram (shahrier.akram@gmail.com)<br/><br/>      </p>
-<h2>Contact</h2>
-<p>Shahrier Akram (shahrier.akram@gmail.com)<br/>      </p>
+    <h2>Demo</h2>
+    <p>Mouseover any of the red boxes you see on the page.</p>
+      <div id="item_1" class="item">
+        Item 1
+        <div class="tooltip_description" style="display:none" title="Item 1 Description">
+          Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+        </div>
+      </div>
 
+      <div id="item_2" class="item">
+        Item 2
+        <div class="tooltip_description" style="display:none" title="Item 2 Description">
+          Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+        </div>
+      </div>
+
+      <div id="item_3" class="item">
+        Item 3
+        <div class="tooltip_description" style="display:none" title="Item 3 Description">
+          Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+        </div>
+      </div>
+
+      <div id="item_4" class="item">
+        Item 4
+        <div class="tooltip_description" style="display:none" title="Item 4 Description">
+          Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+        </div>
+      </div>
+    </p>
+
+    <h2>License</h2>
+    <p>MIT License</p>
+    <h2>Authors</h2>
+    <p>Shahrier Akram (shahrier.akram@gmail.com)
+    <br/>
+    <br/>      </p>
+    <h2>Contact</h2>
+    <p>Shahrier Akram (shahrier.akram@gmail.com)
+    <br/>      </p>
 
     <h2>Download</h2>
     <p>
