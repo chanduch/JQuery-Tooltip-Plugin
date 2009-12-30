@@ -33,12 +33,16 @@
     .footer { text-align:center; padding-top:30px; font-style: italic; }
 
     /** tooltip styles **/
-    div.item { width:100px; height:50px; background-color: maroon; text-align:center; padding-top:25px; color: white;}
+    div.item { width:100px; height:50px; 
+      background-color: #152F15; text-align:center; padding-top:25px; color: white;
+      -moz-border-radius: 0.5em; 
+      -webkit-border-radius: 0.5em;      
+    }
     div.tooltip h1 { color: white; }
-    div#item_1 { position: absolute; top: 100px; left: 0px; }
-    div#item_2 { position: absolute; top: 500px; left: 0px; }      
-    div#item_3 { position: absolute; top: 0px; left: 180px; }            
-    div#item_4 { position: absolute; top: 400px; left: 180px; }
+    div#item_1 { position: absolute; top: 100px; left: 10px; }
+    div#item_2 { position: absolute; top: 500px; left: 10px; }      
+    div#item_3 { position: absolute; top: 0px; left: 170px; }            
+    div#item_4 { position: absolute; top: 400px; left: 170px; }
 	</style>
 	
   
@@ -70,11 +74,11 @@
       <span class="small">by <a href="http://github.com/gdakram">gdakram</a></span></h1>
 
     <div class="description">
-      A simple hover tooltip <a href="http://jquery.com/">JQuery</a> plugin
+      A simple animated hover tooltip <a href="http://jquery.com/">JQuery</a> plugin
     </div>
 
     <h2>Demo</h2>
-    <p>Mouseover any of the red boxes you see on the page.</p>
+    <p>Mouseover any of the item boxes you see on the page.</p>
       <div id="item_1" class="item">
         Item 1
         <div class="tooltip_description" style="display:none" title="Item 1 Description">
@@ -106,13 +110,11 @@
 
     <h2>License</h2>
     <p>MIT License</p>
-    <h2>Authors</h2>
+    <h2>Author/Contact</h2>
     <p>Shahrier Akram (shahrier.akram@gmail.com)
     <br/>
-    <br/>      </p>
-    <h2>Contact</h2>
-    <p>Shahrier Akram (shahrier.akram@gmail.com)
-    <br/>      </p>
+    <br/>
+    </p>
 
     <h2>Download</h2>
     <p>
