@@ -34,7 +34,6 @@
        dialog_content = $(target_elm).find(config.dialog_content_selector)
        dialog_box = _create(dialog_content);
        
-       $("body").append(dialog_box);
        target_elm_position = $(target_elm).offset();
 
        // coming from the top right
@@ -122,19 +121,17 @@
      
      /**
       * Creates the dialog box element
+      * and appends it to the body
       **/
      function _create(content_elm) {
-       dialog_box = $("<div class='tooltip'>\
+       header = ($(content_elm).attr("title")) ? "<h1>" + $(content_elm).attr("title") + "</h1>" : '';
+       return $("<div class='tooltip'>\
          <div class='up_arrow arrow'></div>\
-         <div class='left_arrow arrow'></div\
-         <div class='content'></div>\
+         <div class='left_arrow arrow'></div>\
+         <div class='content'>" + header + $(content_elm).html() + "</div>\
          <div style='clear:both'></div>\
          <div class='down_arrow arrow'></div>\
-       </div>");
-       header = ($(content_elm).attr("title")) ? "<h1>" + $(content_elm).attr("title") + "</h1>" : '';
-       content = $(content_elm).html();
-       $(dialog_box).find("div.content").html(header + content)
-       return dialog_box;
+       </div>").appendTo('body');
      };
           
      return this; 
