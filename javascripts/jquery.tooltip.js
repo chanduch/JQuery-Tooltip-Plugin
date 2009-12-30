@@ -1,3 +1,16 @@
+/**
+ * JQuery Tooltip Plugin
+ *
+ * Licensed under the MIT (http://www.opensource.org/licenses/mit-license.php)
+ *
+ * Written by Shahrier Akram <shahrier.akram@gmail.com>
+ *
+ * Tooltip is a jQuery plugin implementing unobtrusive javascript interaction that appears
+ * near DOM elements, wherever they may be, that require extra information. 
+ *
+ * Visit http://gdakram.github.com/JQuery-Tooltip-Plugin for demo.
+**/
+
 (function($) {
 
    $.fn.tooltip = function(settings) {
