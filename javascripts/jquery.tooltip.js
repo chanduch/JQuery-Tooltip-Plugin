@@ -129,7 +129,7 @@
       * Stop the animation (if any) and remove from dialog box from the DOM
       */
      function _hide(target_elm) {
-       $("body").find("div.tooltip").stop().remove();
+       $("body").find("div.jquery-gdakram-tooltip").stop().remove();
      };
      
      /**
@@ -137,8 +137,8 @@
       * and appends it to the body
       **/
      function _create(content_elm) {
-       header = ($(content_elm).attr("title")) ? "<h1>" + $(content_elm).attr("title") + "</h1>" : '';
-       return $("<div class='tooltip'>\
+       var header = ($(content_elm).attr("title")) ? "<h1>" + $(content_elm).attr("title") + "</h1>" : '';
+       return $("<div class='jquery-gdakram-tooltip'>\
          <div class='up_arrow arrow'></div>\
          <div class='left_arrow arrow'></div>\
          <div class='content'>" + header + $(content_elm).html() + "</div>\
