@@ -44,13 +44,20 @@
       * element's location
       **/
      function _show(target_elm) {
-       dialog_content = $(target_elm).find(config.dialog_content_selector)
-       dialog_box = _create(dialog_content);
+       var dialog_content = $(target_elm).find(config.dialog_content_selector);
+       var dialog_box = _create(dialog_content);
+
+       var is_top_right = $(target_elm).hasClass("tooltiptopright");
+       var is_bottom_right = $(target_elm).hasClass("tooltipbottomright");
+       var is_top = $(target_elm).hasClass("tooltiptop");
+       var is_bottom = $(target_elm).hasClass("tooltipbottom");
+       var has_position = is_top_right || is_bottom_right || is_top || is_bottom;
+       var position;
        
-       target_elm_position = $(target_elm).offset();
+       var target_elm_position = $(target_elm).offset();
 
        // coming from the top right
-       if (target_elm_position.top < $(dialog_box).outerHeight() && target_elm_position.top >= config.arrow_top_offset) {
+       if (is_top_right || !has_position && (target_elm_position.top < $(dialog_box).outerHeight() && target_elm_position.top >= config.arrow_top_offset)) {
          position = { 
            start : { 
              left : target_elm_position.left + $(target_elm).outerWidth() + config.animation_distance,
@@ -64,7 +71,7 @@
          }
        }
        // coming from the bottom right
-       else if (target_elm_position.left < config.arrow_left_offset + $(target_elm).outerWidth() && target_elm_position.top > $(dialog_box).outerHeight()) {
+       else if (is_bottom_right || !has_position && (target_elm_position.left < config.arrow_left_offset + $(target_elm).outerWidth() && target_elm_position.top > $(dialog_box).outerHeight())) {
          position = { 
            start : { 
              left : target_elm_position.left + $(target_elm).outerWidth() + config.animation_distance,
@@ -79,7 +86,7 @@
          $(dialog_box).find("div.left_arrow").css({ top: $(dialog_box).outerHeight() - (config.arrow_top_offset * 2) + "px" });
        }
        // coming from the top
-       else if (target_elm_position.top + config.animation_distance > $(dialog_box).outerHeight() && target_elm_position.left >= config.arrow_left_offset) {
+       else if (is_top || !has_position &&(target_elm_position.top + config.animation_distance > $(dialog_box).outerHeight() && target_elm_position.left >= config.arrow_left_offset)) {
          position = { 
            start : { 
              left : target_elm_position.left + ($(target_elm).outerWidth() / 2) - config.arrow_left_offset,
@@ -93,7 +100,7 @@
          }
        }       
        // coming from the bottom
-       else if (target_elm_position.top + config.animation_distance < $(dialog_box).outerHeight()) {
+       else if (is_bottom || !has_position &&(target_elm_position.top + config.animation_distance < $(dialog_box).outerHeight())) {
          position = { 
            start : { 
              left : target_elm_position.left + ($(target_elm).outerWidth() / 2) - config.arrow_left_offset,
