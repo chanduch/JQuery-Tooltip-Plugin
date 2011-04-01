@@ -23,7 +23,9 @@
        'arrow_top_offset' : 50,
        'arrow_height' : 20,
        'arrow_width' : 20,
-       'animation_duration_ms' : 300
+       'animation_duration_ms' : 300,
+       'event_in':'mouseover',
+       'event_out':'mouseout'
      }; 
      if (settings) $.extend(config, settings);
 
@@ -31,10 +33,10 @@
       * Apply interaction to all the matching elements
       **/
      this.each(function() {
-       $(this).bind("mouseover",function(){
+       $(this).bind(config.event_in,function(){
          _show(this);
        })
-       .bind("mouseout",function(){
+       .bind(config.event_out,function(){
          _hide(this);
        })
      });
